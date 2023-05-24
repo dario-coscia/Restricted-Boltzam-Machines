@@ -93,7 +93,7 @@ class BinaryRestrictedBoltzmannMachine(object):
             X_t.append(latent)
         return np.stack(X_t)
 
-    def transform_inverse(self, X, probs=True):
+    def inverse_transform(self, X, probs=True):
         """Inverse transform the model on the give data.
 
         :param X: Data to be transformed.
