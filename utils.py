@@ -48,3 +48,13 @@ def reconstruction_error(input_, target):
     from sklearn.metrics import mean_squared_error
     err = mean_squared_error(target, input_, multioutput='raw_values')
     return float(np.mean(err)), float(np.std(err))
+
+def make_pipeline_model(reducer, X_train, y_train, X_test, y_test):
+    from sklearn.linear_model import LogisticRegression
+    logistic = LogisticRegression(verbose=1)
+    # fit reducer + logistic
+    latent = reducer.fit_transform(X_train)
+    logistic.fit(latent, y_train)
+    # test
+    latent = reducer.fit_transform(X_test)
+    return logistic.score(latent, y_test)
