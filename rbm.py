@@ -9,7 +9,7 @@ class BinaryRestrictedBoltzmannMachine(object):
     def __init__(
             self,
             n_components=256,
-            learning_rate=0.1,
+            learning_rate=0.01,
             n_iter=10,
             gibbs_steps=1,
             verbose=False,
