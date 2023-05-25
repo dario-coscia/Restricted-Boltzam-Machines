@@ -11,7 +11,7 @@ from utils import fetch_mnist_data, plot_samples, reconstruction_error
 n_components_list = [16, 64, 100]
 rng = 111
 train_data = 2000
-gibbs_steps=10
+gibbs_steps = 5
 noise = float(sys.argv[1])
 
 # methods
@@ -21,7 +21,7 @@ method = {'PCA' : PCA,
 
 # extra hyper parameters methods
 pca_params = [{'random_state' : rng}]
-rbm_params = [{'random_state' : rng, 'n_iter' : 100, 'verbose' : True}]
+rbm_params = [{'random_state' : rng, 'n_iter' : 500, 'verbose' : True, 'gibbs_steps' : gibbs_steps}]
 method_params = {'PCA' : pca_params,
                  'RBM' : rbm_params,
                  }
@@ -30,7 +30,7 @@ method_params = {'PCA' : pca_params,
 X, _, X_t, _ = fetch_mnist_data(seed=rng, train_data=train_data)
 plot_samples(samples=X_t, numb_panels=64, title='MNIST Original', save_title='original_mnist')
 X_noise = X_t + np.random.standard_normal(size=X_t.shape) * noise
-plot_samples(samples=X_noise, numb_panels=64, title=f'MNIST Original + Noise {noise}%', save_title='noise_mnist')
+plot_samples(samples=X_noise, numb_panels=64, title=f'MNIST Original + $\sigma$ {noise}%', save_title='noise_mnist')
 
 # Training models for different components
 columns=['method', 'number components', 'MSE', 'std MSE']
@@ -56,8 +56,6 @@ for n_components in n_components_list:
             # 1. plotting originals  + reconstruction + hidden states
             X_reduced = model.transform(X_noise)
             # if there is noise
-            if noise > 0 and model_name=='RBM':
-                model._gibbs_steps = gibbs_steps
             X_reconstructed = model.inverse_transform(X_reduced)
             plot_samples(samples=X_reconstructed, numb_panels=64, title=f'{name} reconstruction', save_title=f'reconstruction_{n_components}_{name}')
             # 2. reconstruction error

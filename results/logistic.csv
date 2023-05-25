@@ -1,0 +1,25 @@
+,method,number components,accuracy train,accuracy test
+0,K-PCA_Gaussian_0.01,16,0.823,0.791
+1,K-PCA_Gaussian_0.1,16,0.339,0.2915
+2,K-PCA_Gaussian_1,16,0.159,0.09925
+3,K-PCA_Polynomial_1,16,0.868,0.817
+4,K-PCA_Polynomial_2,16,0.878,0.82725
+5,K-PCA_Polynomial_3,16,0.888,0.834
+6,PCA,16,0.868,0.817
+7,RBM,16,0.8,0.75625
+8,K-PCA_Gaussian_0.01,64,0.881,0.84925
+9,K-PCA_Gaussian_0.1,64,0.595,0.42675
+10,K-PCA_Gaussian_1,64,0.252,0.09925
+11,K-PCA_Polynomial_1,64,0.987,0.852
+12,K-PCA_Polynomial_2,64,1.0,0.862
+13,K-PCA_Polynomial_3,64,1.0,0.8675
+14,PCA,64,0.988,0.8505
+15,RBM,64,0.966,0.8575
+16,K-PCA_Gaussian_0.01,100,0.9,0.8575
+17,K-PCA_Gaussian_0.1,100,0.75,0.44375
+18,K-PCA_Gaussian_1,100,0.317,0.09925
+19,K-PCA_Polynomial_1,100,0.996,0.85125
+20,K-PCA_Polynomial_2,100,1.0,0.8735
+21,K-PCA_Polynomial_3,100,1.0,0.87475
+22,PCA,100,0.996,0.85075
+23,RBM,100,0.993,0.8735

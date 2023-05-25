@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def fetch_mnist_data(seed, train_data=1000):
+def fetch_mnist_data(seed, train_data=1000, subset = None):
     from sklearn.datasets import fetch_openml
     from sklearn.preprocessing import minmax_scale
     # fix random state for fetching
@@ -15,6 +15,8 @@ def fetch_mnist_data(seed, train_data=1000):
     X, y  = mnist.data.loc[index_number],mnist.target.loc[index_number]
     X.reset_index(drop=True,inplace=True)
     y.reset_index(drop=True,inplace=True)
+    if subset is not None:
+        X, y = X[:subset], y[:subset]
     # Normalize (0, 1)
     X = minmax_scale(X, feature_range=(0, 1))  # 0-1 scaling
     return X[:train_data], y[:train_data], X[train_data:], y[train_data:]
@@ -51,10 +53,12 @@ def reconstruction_error(input_, target):
 
 def make_pipeline_model(reducer, X_train, y_train, X_test, y_test):
     from sklearn.linear_model import LogisticRegression
-    logistic = LogisticRegression(verbose=1)
+    logistic = LogisticRegression(max_iter=500, solver='newton-cg')
     # fit reducer + logistic
     latent = reducer.fit_transform(X_train)
     logistic.fit(latent, y_train)
+    train_acc = logistic.score(latent, y_train)
     # test
-    latent = reducer.fit_transform(X_test)
-    return logistic.score(latent, y_test)
+    latent = reducer.transform(X_test)
+    test_acc = logistic.score(latent, y_test)
+    return train_acc, test_acc
