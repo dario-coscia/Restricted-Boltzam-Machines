@@ -28,9 +28,9 @@ method_params = {'PCA' : pca_params,
 
 # Download dataset
 X, _, X_t, _ = fetch_mnist_data(seed=rng, train_data=train_data)
-plot_samples(samples=X_t, numb_panels=64, title='MNIST Original', save_title='original_mnist')
+plot_samples(samples=X_t, numb_panels=64, title='MNIST data', save_title='original_mnist')
 X_noise = X_t + np.random.standard_normal(size=X_t.shape) * noise
-plot_samples(samples=X_noise, numb_panels=64, title=f'MNIST Original + $\sigma$ {noise}%', save_title='noise_mnist')
+plot_samples(samples=X_noise, numb_panels=64, title=f'MNIST $\sigma$ = {noise}', save_title='noise_mnist')
 
 # Training models for different components
 columns=['method', 'number components', 'MSE', 'std MSE']
