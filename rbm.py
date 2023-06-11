@@ -176,7 +176,7 @@ class BinaryRestrictedBoltzmannMachine(object):
             probs_v = self._prob_v_given_h(hiddens)
             # sample visibles
             visibles = self._sample_binary_state(probs_v)
-        return hiddens, visibles, probs_h, visibles
+        return hiddens, visibles, probs_h, probs_v
 
     def _sample_binary_state(self, probs):
         """Sampling binary units according to specific probabilities.
